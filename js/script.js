@@ -8,7 +8,7 @@ function createGrid(squaresPerRow){
 
         div.style.cssText = 
         `flex: 0 0 calc(100% / ${squaresPerRow}); 
-        border: 1px solid black;
+        border: 1px solid rgb(236, 233, 233);
         aspect-ratio: 1`;
 
         gridContainer.appendChild(div);
@@ -19,6 +19,6 @@ function createGrid(squaresPerRow){
     }
 }
 
-createGrid(32);
+createGrid(64);
 
 
