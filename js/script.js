@@ -1,4 +1,7 @@
 const gridContainer = document.querySelector("#grid");
+const btnResize = document.querySelector(".resize");
+
+createGrid(16);
 
 function createGrid(squaresPerRow){
     total = squaresPerRow * squaresPerRow;
@@ -19,6 +22,21 @@ function createGrid(squaresPerRow){
     }
 }
 
-createGrid(64);
+
+btnResize.addEventListener("click", () => {
+    const size = prompt("Choose the size of the grid", 16);
+
+    if (size >= 1000){
+        alert("To big! choose something smaller");    
+    }else {
+        resetGrid();
+        createGrid(size);
+    }
+})
 
 
+function resetGrid() {
+    while (gridContainer.firstChild) {
+        gridContainer.removeChild(gridContainer.lastChild);
+    }
+}
