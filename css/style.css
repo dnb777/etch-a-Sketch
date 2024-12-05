@@ -1,0 +1,30 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+    font-family:  'monospace', 'sans-serif';
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    font-size: 42px;
+    margin: 100px 0 20px 0; 
+}
+
+.grid {
+    border: 5px solid black;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 600px;
+    aspect-ratio: 1;
+}
+
+
