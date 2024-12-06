@@ -1,7 +1,8 @@
 const gridContainer = document.querySelector("#grid");
-const btnResize = document.querySelector(".resize");
+const btnContainer = document.querySelector("#button-container");
 
 createGrid(16);
+paintSquare();
 
 function createGrid(squaresPerRow){
     total = squaresPerRow * squaresPerRow;
@@ -15,28 +16,54 @@ function createGrid(squaresPerRow){
         aspect-ratio: 1`;
 
         gridContainer.appendChild(div);
-        
-        div.addEventListener("mouseenter", (e) => {
-            e.target.classList.add("paint");
-        })
     }
+    paintSquare();
 }
 
+btnContainer.addEventListener("click", (e) => {
+    let target = e.target;
 
-btnResize.addEventListener("click", () => {
-    const size = prompt("Choose the size of the grid", 16);
+    switch (target.id) {
+        case 'resize':
+            const size = prompt("Choose the size of the grid", 16);
 
-    if (size >= 1000){
-        alert("To big! choose something smaller");    
-    }else {
-        resetGrid();
-        createGrid(size);
+            if (size >= 1000){
+            alert("To big! choose something smaller");    
+            }else {
+            resetGrid();
+            createGrid(size);
+            }
+        break;
+
+        case 'rainbow':
+            paintSquare(randomRgb);
+            break;
+        
+        case 'eraser':
+            paintSquare(() => 'white');
+            break;
     }
 })
 
+
+function paintSquare(colorFunction = () => "black") {
+    gridContainer.querySelectorAll("div").forEach((div) => {
+        const newDiv = div.cloneNode(true);
+        newDiv.addEventListener("mouseenter", (e) => {
+            e.target.style.backgroundColor = colorFunction();
+        });
+        div.replaceWith(newDiv);
+    });
+}
 
 function resetGrid() {
     while (gridContainer.firstChild) {
         gridContainer.removeChild(gridContainer.lastChild);
     }
+}
+
+function randomRgb(){
+    return `rgb(${Math.floor(Math.random() * 255)}, 
+                ${Math.floor(Math.random() * 255)}, 
+                ${Math.floor(Math.random() * 255)})`;
 }
